@@ -1,0 +1,61 @@
+Normalisation Baader
+Ontologie : [["A", "=", "B"]]
+Result :
+[["A", "subs", "B"], ["B", "subs", "A"]]
+
+Ontologie : [["A", "subs", "B"]]
+Result :
+[["A", "subs", "B"]]
+
+Ontologie : [["A", "subs", "B", "&", "C"]]
+Result :
+[["A", "subs", "B"], ["A", "subs", "C"]]
+
+Ontologie : [["A", "&", "B", "&", "C", "subs", "D"]]
+Result :
+[["A", "&", "X_1", "subs", "D"], ["B", "&", "C", "subs", "X_1"]]
+
+Ontologie : [["A", "&", "*R.", ["B"], "subs", "C"]]
+Result :
+[["A", "&", "X_1", "subs", "C"], ["R_*R.B", "subs", "X_1"], ["R_*R.B", "subs", "*R.", ["B"]], ["*R.", ["B"], "subs", "R_*R.B"]]
+
+Ontologie : [["A", "&", "*R.", ["B"], "&", "D", "subs", "C"]]
+Result :
+[["A", "&", "X_2", "subs", "C"], ["R_*R.B", "subs", "X_1"], ["D", "&", "X_1", "subs", "X_2"], ["R_*R.B", "subs", "*R.", ["B"]], ["*R.", ["B"], "subs", "R_*R.B"]]
+
+Ontologie : [["*R.", ["B"], "&", "D", "subs", "C"]]
+Result :
+[["X_1", "&", "D", "subs", "C"], ["R_*R.B", "subs", "X_1"], ["R_*R.B", "subs", "*R.", ["B"]], ["*R.", ["B"], "subs", "R_*R.B"]]
+
+Ontologie : [["*R.", ["B", "&", "D"], "subs", "C"]]
+Result :
+[["R_*R.X_1", "subs", "C"], ["B", "&", "D", "subs", "X_1"], ["R_*R.X_1", "subs", "*R.", ["X_1"]], ["*R.", ["X_1"], "subs", "R_*R.X_1"]]
+
+Ontologie : [["*R.", ["*S.", ["D"]], "subs", "C"]]
+Result :
+[["R_*R.X_1", "subs", "C"], ["R_*S.D", "subs", "X_1"], ["R_*R.X_1", "subs", "*R.", ["X_1"]], ["*R.", ["X_1"], "subs", "R_*R.X_1"], ["R_*S.D", "subs", "*S.", ["D"]], ["*S.", ["D"], "subs", "R_*S.D"]]
+
+Ontologie : [["C", "subs", "A", "&", "*R.", ["B"]]]
+Result :
+[["C", "subs", "A"], ["C", "subs", "R_*R.B"], ["R_*R.B", "subs", "*R.", ["B"]], ["*R.", ["B"], "subs", "R_*R.B"]]
+
+Ontologie : [["C", "subs", "A", "&", "*R.", ["B"], "&", "D"]]
+Result :
+[["C", "subs", "A"], ["C", "subs", "R_*R.B"], ["C", "subs", "D"], ["R_*R.B", "subs", "*R.", ["B"]], ["*R.", ["B"], "subs", "R_*R.B"]]
+
+Ontologie : [["C", "subs", "*R.", ["B"], "&", "D"]]
+Result :
+[["C", "subs", "R_*R.B"], ["C", "subs", "D"], ["R_*R.B", "subs", "*R.", ["B"]], ["*R.", ["B"], "subs", "R_*R.B"]]
+
+Ontologie : [["C", "subs", "*R.", ["B", "&", "D"]]]
+Result :
+[["C", "subs", "R_*R.X_1"], ["X_1", "subs", "B"], ["X_1", "subs", "D"], ["R_*R.X_1", "subs", "*R.", ["X_1"]], ["*R.", ["X_1"], "subs", "R_*R.X_1"]]
+
+Ontologie : [["C", "subs", "*R.", ["*S.", ["D"]]]]
+Result :
+[["C", "subs", "R_*R.X_1"], ["X_1", "subs", "R_*S.D"], ["R_*R.X_1", "subs", "*R.", ["X_1"]], ["*R.", ["X_1"], "subs", "R_*R.X_1"], ["R_*S.D", "subs", "*S.", ["D"]], ["*S.", ["D"], "subs", "R_*S.D"]]
+
+Ontologie : [["C", "&", "*R.", ["A", "&", "B"], "subs", "*R.", ["*S.", ["D"], "&", "E"], "&", "F"]]
+Result :
+[["C", "&", "X_1", "subs", "R_*R.X_2"], ["R_*R.X_3", "subs", "X_1"], ["X_2", "subs", "R_*S.D"], ["C", "&", "X_1", "subs", "F"], ["A", "&", "B", "subs", "X_3"], ["X_2", "subs", "E"], ["R_*R.X_2", "subs", "*R.", ["X_2"]], ["*R.", ["X_2"], "subs", "R_*R.X_2"], ["R_*R.X_3", "subs", "*R.", ["X_3"]], ["*R.", ["X_3"], "subs", "R_*R.X_3"], ["R_*S.D", "subs", "*S.", ["D"]], ["*S.", ["D"], "subs", "R_*S.D"]]
+

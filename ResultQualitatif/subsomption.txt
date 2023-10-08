@@ -1,0 +1,43 @@
+2023-10-08 16:53:06 +0200 - Test Started
+Ontologie : [["A", "subs", "B"]]
+Descriptions : 
+ Requete:["*A.", ["A"]]
+ Reponse:["*A.", ["A"]]
+Resultat subsomption :
+equiv
+
+Ontologie : [["A", "subs", "B"]]
+Descriptions : 
+ Requete:["*A.", ["A"]]
+ Reponse:["*A.", ["B"]]
+Resultat subsomption :
+subsuming
+
+Ontologie : [["A", "subs", "B"]]
+Descriptions : 
+ Requete:["*A.", ["A"]]
+ Reponse:["*A.", ["C"]]
+Resultat subsomption :
+nr
+
+Ontologie : [["A", "subs", "*r.", ["B"]]]
+Descriptions : 
+ Requete:["*A.", ["A"]]
+ Reponse:["*A.", ["*r.", ["B"]]]
+Resultat subsomption :
+subsuming
+
+Ontologie : [["A", "subs", "*r.", ["B"]]]
+Descriptions : 
+ Requete:["*A.", ["A"]]
+ Reponse:["*A.", ["*r.", ["C"]]]
+Resultat subsomption :
+nr
+
+Ontologie : [["A", "subs", "*r.", ["B"]]]
+Descriptions : 
+ Requete:["*A.", ["*r.", ["B", "&", "C"]]]
+ Reponse:["*A.", ["*r.", ["B"], "&", "*r.", ["C"]]]
+Resultat subsomption :
+subsuming
+

@@ -1,0 +1,100 @@
+2023-10-08 16:53:06 +0200 - Test Started
+Ontologie : [["A", "subs", "B"]]
+Descriptions : 
+ Requete:["A"]
+ Reponse:["B"]
+Rest :
+["A"]
+Miss :
+["Top"]
+
+Ontologie : [["A", "subs", "B"]]
+Descriptions : 
+ Requete:["A"]
+ Reponse:["A"]
+Rest :
+["Top"]
+Miss :
+["Top"]
+
+Ontologie : [["A", "subs", "B"], ["B", "subs", "C"]]
+Descriptions : 
+ Requete:["C"]
+ Reponse:["A"]
+Rest :
+["Top"]
+Miss :
+["A", "&", "B"]
+
+Ontologie : [["A", "subs", "B"], ["B", "subs", "*r.", ["C"]]]
+Descriptions : 
+ Requete:["R_*r.C"]
+ Reponse:["A"]
+Rest :
+["Top"]
+Miss :
+["A", "&", "B"]
+
+Ontologie : [["A", "subs", "B"], ["B", "subs", "*r.", ["C"]]]
+Descriptions : 
+ Requete:["R_*r.C", "&", "D"]
+ Reponse:["A"]
+Rest :
+["D"]
+Miss :
+["A", "&", "B"]
+
+Ontologie : [["A", "subs", "B"], ["B", "subs", "*r.", ["C"]]]
+Descriptions : 
+ Requete:["R_*r.C", "&", "D"]
+ Reponse:["A", "&", "E"]
+Rest :
+["D"]
+Miss :
+["A", "&", "E", "&", "B"]
+
+Ontologie : [["A", "subs", "B"], ["B", "subs", "*r.", ["C"]], ["A", "&", "E", "subs", "D"]]
+Descriptions : 
+ Requete:["R_*r.C", "&", "D"]
+ Reponse:["A", "&", "E"]
+Rest :
+["Top"]
+Miss :
+["A", "&", "E", "&", "B"]
+
+Ontologie : [["A", "subs", "B"], ["B", "subs", "*r.", ["C"]], ["A", "&", "E", "subs", "D"]]
+Descriptions : 
+ Requete:["R_*r.C", "&", "D"]
+ Reponse:["X"]
+Rest :
+["*r.", ["C"], "&", "D"]
+Miss :
+["X"]
+
+Ontologie : [["A", "subs", "B"], ["B", "subs", "*r.", ["C"]], ["A", "&", "E", "subs", "D"], ["X", "=", "Y"]]
+Descriptions : 
+ Requete:["R_*r.C", "&", "Y"]
+ Reponse:["X"]
+Rest :
+["*r.", ["C"]]
+Miss :
+["Top"]
+
+Ontologie : [["A", "subs", "B"], ["B", "subs", "*r.", ["C"]], ["A", "&", "E", "subs", "D"], ["X", "=", "Y"], ["*r.", ["X"], "subs", "Z"]]
+Descriptions : 
+ Requete:["R_*r.C", "&", "Y"]
+ Reponse:["R_*r.Y"]
+Rest :
+["*r.", ["C"], "&", "Y", "&", "X"]
+Miss :
+["*r.", ["Y", "&", "X"], "&", "Z"]
+
+Ontologie : [["A", "subs", "B"], ["B", "subs", "*r.", ["C"]], ["A", "&", "E", "subs", "D"], ["X", "=", "Y"], ["*r.", ["X"], "subs", "Z"]]
+Descriptions : 
+ Requete:["R_*r.C", "&", "Y"]
+ Reponse:["Z_*r.1"]
+Rest :
+["*r.", ["C"], "&", "Y", "&", "X"]
+Miss :
+["*r.", ["Y", "&", "X"], "&", "Z"]
+

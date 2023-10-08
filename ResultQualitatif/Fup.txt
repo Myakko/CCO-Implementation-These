@@ -1,0 +1,14 @@
+2023-10-08 16:53:06 +0200 - Test Started
+Ontologie : [["A", "subs", "*R.", ["B"]], ["C", "subs", "*R.", ["D"]], ["D", "subs", "E"], ["E", "subs", "*S.", ["F"]]]
+Ontologie normalisée: [["A", "subs", "R_*R.B"], ["C", "subs", "R_*R.D"], ["D", "subs", "E"], ["E", "subs", "R_*S.F"], ["R_*R.B", "subs", "*R.", ["B"]], ["*R.", ["B"], "subs", "R_*R.B"], ["R_*R.D", "subs", "*R.", ["D"]], ["*R.", ["D"], "subs", "R_*R.D"], ["R_*S.F", "subs", "*S.", ["F"]], ["*S.", ["F"], "subs", "R_*S.F"]]
+Classi au début :
+{"A"=>["A", "R_*R.B"], "R_*R.B"=>["R_*R.B"], "C"=>["C", "R_*R.D"], "R_*R.D"=>["R_*R.D"], "D"=>["D", "E", "R_*S.F"], "E"=>["E", "R_*S.F"], "R_*S.F"=>["R_*S.F"], "B"=>["B"], "F"=>["F"], "role"=>{"*R."=>[["R_*R.B", "B"], ["R_*R.D", "D"]], "*S."=>[["R_*S.F", "F"]]}}
+Classi à la fin :
+{"A"=>["A", "R_*R.B"], "R_*R.B"=>["R_*R.B"], "C"=>["C", "R_*R.D"], "R_*R.D"=>["R_*R.D"], "D"=>["D", "E", "R_*S.F"], "E"=>["E", "R_*S.F"], "R_*S.F"=>["R_*S.F"], "B"=>["B"], "F"=>["F"], "role"=>{"*R."=>[["R_*R.B", "B"], ["R_*R.D", "D"]], "*S."=>[["R_*S.F", "F"]], "*r."=>[["R_*r.Top", "Top"]], "*s."=>[["Z_*s.1", "X_2"]]}, "R_*r.Top"=>["R_*r.Top"], "Top"=>["Top"], "Z_*s.1"=>["Z_*s.1"], "X_2"=>["X_2", "Top", "H", "X_1", "F_1"], "X_3"=>["X_3"], "A_1"=>["A_1", "A", "R_*r.Top", "Z_*s.1", "R_*R.B", "X_3"], "H"=>["H"], "X_1"=>["X_1"], "F_1"=>["F_1", "Top", "H", "X_1"]}
+Description originelle:
+["A", "&", "*r.", ["Top"], "&", "*s.", ["Top", "&", "H"]]
+Description :
+["A", "&", "R_*r.Top", "&", "Z_*s.1"]
+Resultat du Fup :
+["A", "&", "*r.", ["Top"], "&", "*s.", ["Top", "&", "H"], "&", "*R.", ["B"]]
+

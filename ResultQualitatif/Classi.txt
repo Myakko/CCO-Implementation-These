@@ -1,0 +1,56 @@
+2023-10-08 16:53:06 +0200 - Test Started
+Ontologie : [["A", "subs", "B"]]
+Ontologie normalisée: [["A", "subs", "B"]]
+Result :
+{"A"=>["A", "B"], "B"=>["B"], "role"=>{}}
+
+Ontologie : [["A", "=", "B"]]
+Ontologie normalisée: [["A", "subs", "B"], ["B", "subs", "A"]]
+Result :
+{"A"=>["A", "B"], "B"=>["B", "A"], "role"=>{}}
+
+Ontologie : [["A", "subs", "B"], ["B", "subs", "C"]]
+Ontologie normalisée: [["A", "subs", "B"], ["B", "subs", "C"]]
+Result :
+{"A"=>["A", "B", "C"], "B"=>["B", "C"], "C"=>["C"], "role"=>{}}
+
+Ontologie : [["A", "subs", "*X.", ["Y"]]]
+Ontologie normalisée: [["A", "subs", "R_*X.Y"], ["R_*X.Y", "subs", "*X.", ["Y"]], ["*X.", ["Y"], "subs", "R_*X.Y"]]
+Result :
+{"A"=>["A", "R_*X.Y"], "R_*X.Y"=>["R_*X.Y"], "Y"=>["Y"], "role"=>{"*X."=>[["R_*X.Y", "Y"]]}}
+
+Ontologie : [["*X.", ["Y"], "subs", "A"]]
+Ontologie normalisée: [["R_*X.Y", "subs", "A"], ["R_*X.Y", "subs", "*X.", ["Y"]], ["*X.", ["Y"], "subs", "R_*X.Y"]]
+Result :
+{"R_*X.Y"=>["R_*X.Y", "A"], "A"=>["A"], "Y"=>["Y"], "role"=>{"*X."=>[["R_*X.Y", "Y"]]}}
+
+Ontologie : [["A", "subs", "B"], ["B", "&", "A", "subs", "C"]]
+Ontologie normalisée: [["A", "subs", "B"], ["B", "&", "A", "subs", "C"]]
+Result :
+{"A"=>["A", "B", "C"], "B"=>["B"], "C"=>["C"], "role"=>{}}
+
+Ontologie : [["A", "subs", "B"], ["B", "subs", "*R.", ["D"]], ["*R.", ["D"], "subs", "E"]]
+Ontologie normalisée: [["A", "subs", "B"], ["B", "subs", "R_*R.D"], ["R_*R.D", "subs", "E"], ["R_*R.D", "subs", "*R.", ["D"]], ["*R.", ["D"], "subs", "R_*R.D"]]
+Result :
+{"A"=>["A", "B", "R_*R.D", "E"], "B"=>["B", "R_*R.D", "E"], "R_*R.D"=>["R_*R.D", "E"], "E"=>["E"], "D"=>["D"], "role"=>{"*R."=>[["R_*R.D", "D"]]}}
+
+Ontologie : [["A", "subs", "B"], ["B", "&", "A", "subs", "*R.", ["D"]], ["*R.", ["D"], "subs", "E"]]
+Ontologie normalisée: [["A", "subs", "B"], ["B", "&", "A", "subs", "R_*R.D"], ["R_*R.D", "subs", "E"], ["R_*R.D", "subs", "*R.", ["D"]], ["*R.", ["D"], "subs", "R_*R.D"]]
+Result :
+{"A"=>["A", "B", "R_*R.D", "E"], "B"=>["B"], "R_*R.D"=>["R_*R.D", "E"], "E"=>["E"], "D"=>["D"], "role"=>{"*R."=>[["R_*R.D", "D"]]}}
+
+Ontologie : [["A", "subs", "B"], ["B", "&", "A", "subs", "*R.", ["D"]], ["*R.", ["D"], "subs", "E"], ["E", "subs", "F", "&", "G"]]
+Ontologie normalisée: [["A", "subs", "B"], ["B", "&", "A", "subs", "R_*R.D"], ["R_*R.D", "subs", "E"], ["E", "subs", "F"], ["E", "subs", "G"], ["R_*R.D", "subs", "*R.", ["D"]], ["*R.", ["D"], "subs", "R_*R.D"]]
+Result :
+{"A"=>["A", "B", "R_*R.D", "E", "F", "G"], "B"=>["B"], "R_*R.D"=>["R_*R.D", "E", "F", "G"], "E"=>["E", "F", "G"], "F"=>["F"], "G"=>["G"], "D"=>["D"], "role"=>{"*R."=>[["R_*R.D", "D"]]}}
+
+Ontologie : [["A", "subs", "B"], ["B", "&", "A", "subs", "*R.", ["D"]], ["*R.", ["D"], "subs", "E"], ["E", "subs", "F", "&", "G"], ["B", "&", "G", "subs", "H"]]
+Ontologie normalisée: [["A", "subs", "B"], ["B", "&", "A", "subs", "R_*R.D"], ["R_*R.D", "subs", "E"], ["E", "subs", "F"], ["B", "&", "G", "subs", "H"], ["E", "subs", "G"], ["R_*R.D", "subs", "*R.", ["D"]], ["*R.", ["D"], "subs", "R_*R.D"]]
+Result :
+{"A"=>["A", "B", "R_*R.D", "E", "F", "G", "H"], "B"=>["B"], "R_*R.D"=>["R_*R.D", "E", "F", "G"], "E"=>["E", "F", "G"], "F"=>["F"], "G"=>["G"], "H"=>["H"], "D"=>["D"], "role"=>{"*R."=>[["R_*R.D", "D"]]}}
+
+Ontologie : [["*X.", ["Y", "&", "Z"], "=", "A"], ["*X.", ["Y"], "&", "*X.", ["Z"], "=", "B"]]
+Ontologie normalisée: [["R_*X.X_1", "subs", "A"], ["X_2", "&", "X_3", "subs", "B"], ["A", "subs", "R_*X.X_4"], ["B", "subs", "R_*X.Y"], ["Y", "&", "Z", "subs", "X_1"], ["R_*X.Y", "subs", "X_2"], ["R_*X.Z", "subs", "X_3"], ["X_4", "subs", "Y"], ["B", "subs", "R_*X.Z"], ["X_4", "subs", "Z"], ["R_*X.X_1", "subs", "*X.", ["X_1"]], ["*X.", ["X_1"], "subs", "R_*X.X_1"], ["R_*X.X_4", "subs", "*X.", ["X_4"]], ["*X.", ["X_4"], "subs", "R_*X.X_4"], ["R_*X.Y", "subs", "*X.", ["Y"]], ["*X.", ["Y"], "subs", "R_*X.Y"], ["R_*X.Z", "subs", "*X.", ["Z"]], ["*X.", ["Z"], "subs", "R_*X.Z"]]
+Result :
+{"R_*X.X_1"=>["R_*X.X_1", "A", "R_*X.X_4", "R_*X.Y", "R_*X.Z", "X_2", "X_3", "B"], "A"=>["A", "R_*X.X_4", "R_*X.X_1", "R_*X.Y", "R_*X.Z", "X_2", "X_3", "B"], "X_2"=>["X_2"], "X_3"=>["X_3"], "B"=>["B", "R_*X.Y", "R_*X.Z", "X_2", "X_3"], "R_*X.X_4"=>["R_*X.X_4", "R_*X.X_1", "R_*X.Y", "R_*X.Z", "A", "X_2", "X_3", "B"], "R_*X.Y"=>["R_*X.Y", "X_2"], "Y"=>["Y"], "Z"=>["Z"], "X_1"=>["X_1"], "R_*X.Z"=>["R_*X.Z", "X_3"], "X_4"=>["X_4", "Y", "Z", "X_1"], "role"=>{"*X."=>[["R_*X.X_1", "X_1"], ["R_*X.X_4", "X_4"], ["R_*X.Y", "Y"], ["R_*X.Z", "Z"]]}}
+
